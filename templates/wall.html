@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>The Wall !!!</title>
+  </head>
+  <style media="screen">
+  #container {
+    text-align: center;
+  }
+  #header{
+    height: 60px;
+    width: auto;
+    background-color: grey;
+  }
+  #header h2,h3{
+    display: inline-block;
+  }
+  #header h3 {
+    margin-left: 800px;
+    text-align: right;
+  }
+  #posts {
+    width: 700px;
+    height: auto;
+    background-color: lightgrey;
+    margin: 0px auto;
+  }
+  .smallpostbox{
+    width: 700px;
+    height: auto;
+    /*background-color: black;*/
+  }
+  .smallpostbox p {
+    width: 700px;
+  }
+
+  </style>
+  <body>
+    <div id="container">
+      <div id="header">
+        <h2>Coding Dojo Wall</h2>
+        <h3>{{user['first_name']}}{{user['last_name']}}</h3>
+        <a href="/logout">Logout</a>
+      </div>
+      <div id="postmessage">
+        <form class="" action="/postmessage/{{user['id']}}" method="post">
+          <textarea name="post" rows="7" cols="140" placeholder="input your post here!!!"></textarea><br>
+          <input type="submit" name="submit" value="Post">
+          <hr>
+        </form>
+
+      </div>
+      <div id="posts">
+        {% if all_posts %}
+          {% for post in all_posts %}
+            <div class="smallpostbox">
+              <h3>{{post['first_name']}}   {{post['last_name']}}   {{post['created_at']}}</h3><br>
+              <p>{{post['message']}}</p>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>

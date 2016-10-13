@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>The Wall !!!</title>
+  </head>
+  <style media="screen">
+    #container{
+      /*width: auto;
+      height: 40px;*/
+      background-color: lightgrey;
+      text-align: center;
+    }
+    #header {
+      height: auto;
+      width: auto;
+      background: grey;
+      text-align: left;
+    }
+    #warning {
+      height: auto;
+      width: auto;
+      background: green;
+    }
+    #registerbox {
+      height: 250px;
+      width: 300px;
+      /*background-color: black;*/
+      vertical-align: top;
+      display: inline-block;
+      text-align: right;
+
+    }
+    #loginbox{
+      height: 250px;
+      width: 250px;
+      /*background: yellow;*/
+      vertical-align: top;
+      display: inline-block;
+      margin-left: 40px;
+      text-align: right;
+
+    }
+  </style>
+  <body>
+    <div id="container">
+      <div id="header">
+        <h2>Coding Dojo Wall</h2>
+      </div>
+      <div id="warning">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <p>{{message}}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      </div>
+      <div id="registerbox">
+        <p>
+          Please register here if you dont have an account yet
+        </p>
+        <form class="" action="/register" method="post">
+          first name: <input type="text" name="first_name" value=""><br>
+          last name : <input type="text" name="last_name" value=""><br>
+          email address: <input type="text" name="email" value=""><br>
+          password: <input type="text" name="password" value=""><br>
+          confirm password: <input type="text" name="confirmpassword" value=""><br>
+          <input type="submit" name="submit" value="Register!">
+        </form>
+      </div>
+      <div id="loginbox">
+        <p>
+          login from here
+        </p>
+        <form class="" action="/login" method="post">
+          email address: <input type="text" name="email" value=""><br>
+          password: <input type="text" name="password" value=""><br>
+          <input type="submit" name="submit" value="submit">
+        </form>
+      </div>
+
+    </div>
+  </body>
+</html>
