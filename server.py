@@ -72,8 +72,13 @@ def wall():
         LEFT JOIN users ON users.id= messages.user_id
         ORDER BY created_at DESC"""
         all_posts = mysql.query_db(query)
-        print all_posts
-        return render_template('wall.html', user=user[0], all_posts=all_posts)
+
+        query = """SELECT * FROM comments
+        LEFT JOIN users ON users.id = comments.user_id
+        ORDER BY comments.created_at ASC"""
+        all_comments = mysql.query_db(query)
+
+        return render_template('wall.html', user=user[0], all_posts=all_posts, all_comments=all_comments)
     else:
         flash("You are not logged in yet bitch")
         return redirect('/')
@@ -92,6 +97,20 @@ def postmessage(id):
     print query
     return redirect('/wall')
 
+@app.route('/postcomments/<postid>', methods=['POST'])
+def postcomments(postid):
+    userid=session['current_user']
+    print postid, userid
+    query = """INSERT INTO comments(message_id, user_id, comment, created_at, updated_at)
+    VALUES (:postid, :userid, :comment, NOW(), NOW())"""
+    data = {
+            'postid':postid,
+            'userid':userid,
+            'comment':request.form['comments']
+    }
+    mysql.query_db(query, data)
+    print query
+    return redirect('/wall')
 
 
 

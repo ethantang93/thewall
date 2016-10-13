@@ -52,11 +52,25 @@
 
       </div>
       <div id="posts">
+        <h2>Posts</h2>
         {% if all_posts %}
           {% for post in all_posts %}
             <div class="smallpostbox">
               <h3>{{post['first_name']}}   {{post['last_name']}}   {{post['created_at']}}</h3><br>
               <p>{{post['message']}}</p>
+              {% if all_comments %}
+                {% for comments in all_comments%}
+                  {% if comments['message_id']== post['id']%}
+                    <p>{{comments['comment']}}</p>
+                  {%endif%}
+                {%endfor%}
+              {%endif%}
+
+              <form class="" action="/postcomments/{{post['id']}}" method="post">
+                <textarea name="comments" rows="8" cols="40" placeholder="post your comments here"></textarea><br>
+                <input type="submit" name="submit" value="Post Comment">
+              </form>
+              <hr>
             </div>
           {% endfor %}
         {% endif %}
