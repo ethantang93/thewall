@@ -48,7 +48,16 @@
   .smallpostbox p {
     width: 700px;
   }
-
+  .commentsbox {
+    background-color: rgba(242,242,242,0.7);
+    border-left: 1px solid grey;
+    border-bottom: 1px solid grey;
+    border-right: 1px solid grey;
+    text-align: left;
+  }
+  p {
+    margin-top: 0px;
+  }
   </style>
   <body>
     <div id="container">
@@ -62,7 +71,6 @@
         <form class="" action="/postmessage/{{user['id']}}" method="post">
           <textarea name="post" rows="7" cols="115" placeholder="input your post here!!!"></textarea><br>
           <input type="submit" name="submit" value="Post Your Message">
-          <hr>
         </form>
 
       </div>
@@ -73,13 +81,13 @@
             <div class="smallpostbox">
               <h3>{{post['first_name']}}   {{post['last_name']}}   {{post['created_at']}}</h3><br>
               <p>{{post['message']}}</p>
-              <hr>
-
               {% if all_comments %}
                 {% for comments in all_comments%}
                   {% if comments['message_id']== post['id']%}
-                    <p>{{comments['first_name']}}  {{comments['last_name']}} {{comments['comments.created_at']}}</p><br>
-                    <p>{{comments['comment']}}</p>
+                    <div class="commentsbox">
+                      <p>{{comments['first_name']}}  {{comments['last_name']}} {{comments['comments.created_at']}}</p><br>
+                      <p>{{comments['comment']}}</p>
+                    </div>
                   {%endif%}
                 {%endfor%}
               {%endif%}
@@ -87,8 +95,6 @@
                 <textarea name="comments" rows="3" cols="80" placeholder="post your comments here"></textarea><br>
                 <input type="submit" name="submit" value="Post Comment">
               </form>
-              <hr>
-              <hr>
             </div>
           {% endfor %}
         {% endif %}
