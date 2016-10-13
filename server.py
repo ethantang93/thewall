@@ -80,7 +80,7 @@ def wall():
 
         return render_template('wall.html', user=user[0], all_posts=all_posts, all_comments=all_comments)
     else:
-        flash("You are not logged in yet bitch")
+        flash("Dont try to sneak in here bitch")
         return redirect('/')
 
 @app.route('/postmessage/<id>', methods=['POST'])

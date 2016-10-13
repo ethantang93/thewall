@@ -7,19 +7,33 @@
   <style media="screen">
   #container {
     text-align: center;
+    font-family: Helvetica Neue;
   }
   #header{
-    height: 60px;
-    width: auto;
-    background-color: grey;
-  }
-  #header h2,h3{
     display: inline-block;
+    height: 60px;
+    width: 100%;
+    background-color: rgba(0,0,0,0.8)
+
+  }
+  #header h2{
+    display: inline-block;
+    color: white;
+    font-family: Myriad Pro;
   }
   #header h3 {
+    display: inline-block;
     margin-left: 800px;
     text-align: right;
+    color: white;
+    font-family: Myriad Pro;
   }
+  #header a {
+    display: inline-block;
+    color: white;
+    font-family: Myriad Pro;
+  }
+
   #posts {
     width: 700px;
     height: auto;
@@ -40,13 +54,14 @@
     <div id="container">
       <div id="header">
         <h2>Coding Dojo Wall</h2>
-        <h3>{{user['first_name']}}{{user['last_name']}}</h3>
+        <h3>Welcome back {{user['first_name']}}   {{user['last_name']}}</h3>
         <a href="/logout">Logout</a>
       </div>
       <div id="postmessage">
+        <h2>Post A Message Here</h2>
         <form class="" action="/postmessage/{{user['id']}}" method="post">
-          <textarea name="post" rows="7" cols="140" placeholder="input your post here!!!"></textarea><br>
-          <input type="submit" name="submit" value="Post">
+          <textarea name="post" rows="7" cols="115" placeholder="input your post here!!!"></textarea><br>
+          <input type="submit" name="submit" value="Post Your Message">
           <hr>
         </form>
 
@@ -58,18 +73,21 @@
             <div class="smallpostbox">
               <h3>{{post['first_name']}}   {{post['last_name']}}   {{post['created_at']}}</h3><br>
               <p>{{post['message']}}</p>
+              <hr>
+
               {% if all_comments %}
                 {% for comments in all_comments%}
                   {% if comments['message_id']== post['id']%}
+                    <p>{{comments['first_name']}}  {{comments['last_name']}} {{comments['comments.created_at']}}</p><br>
                     <p>{{comments['comment']}}</p>
                   {%endif%}
                 {%endfor%}
               {%endif%}
-
               <form class="" action="/postcomments/{{post['id']}}" method="post">
-                <textarea name="comments" rows="8" cols="40" placeholder="post your comments here"></textarea><br>
+                <textarea name="comments" rows="3" cols="80" placeholder="post your comments here"></textarea><br>
                 <input type="submit" name="submit" value="Post Comment">
               </form>
+              <hr>
               <hr>
             </div>
           {% endfor %}
